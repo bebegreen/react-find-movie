@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My-MDB</title>
+  <link rel="stylesheet" href="./css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Marck+Script|Oleo+Script" rel="stylesheet">
+  <script src="https://apis.google.com/js/api.js"></script>
+
+
+</head>
+
+<body>
+
+
+  <div id='home-page'>
+
+    <header>
+      <h1>My-MDB</h1>
+      <button id='add'>Add your favourite movies</button>
+    </header>
+
+    <aside id='sidebar'></aside>
+
+    <section id='filter'>
+      <input placeholder="search">
+    </section>
+
+    <main id='movie-list'></main>
+
+  </div>
+
+  <div id='dialog'>
+    <div id='dialog-box'>
+      <div id='details'>
+
+        <h1 id='title'></h1>
+        <div id='cast'></div>
+
+        <div id='actions'>
+          <button id='delete'>Delete</button>
+          <h2 id='confirm' class='confirmation'>Are you sure?</h2>
+          <button id='yes' class='confirmation'>delete</button>
+          <button id='cancel' class='confirmation'>cancel</button>
+          <button id='edit'>Edit</button>
+        </div>
+
+        <div id='iframe-wrapper'>
+          <div id='spinner' class='loader'></div>
+          <iframe frameborder="0" gesture="media" allowfullscreen></iframe>
+        </div>
+
+      </div>
+
+
+      <form action='http://localhost:3000/movies' method='post'>
+        <input type="text" placeholder="title" name='title' required id='movie-title'>
+        <input type="text" placeholder="director" name='director' id='movie-director'>
+        <input type="text" placeholder="year" name='year' id='movie-year'>
+        <input type="text" placeholder="cast" name='cast' id='movie-cast'>
+        <input type="text" placeholder="image url" name='imageUrl' id='movie-image'>
+
+        <button id='submit'>submit</button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    var CLIENT_ID = '800892646502-oh1mgv56s426jbasalc114tk2del6a1h.apps.googleusercontent.com';
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
+    var SCOPES = 'https://www.googleapis.com/auth/youtube.readonly';
+
+    function handleClientLoad() {
+      gapi.load('client:auth2', initClient);
+    }
+
+    function initClient() {
+      gapi.client.init({
+        discoveryDocs: DISCOVERY_DOCS,
+        clientId: CLIENT_ID,
+        scope: SCOPES
+      }).then(function () {
+        // Listen for sign-in state changes.
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+        // Handle the initial sign-in state.
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        // handleAuthClick();
+
+      });
+    }
+
+    function updateSigninStatus(isSignedIn) {
+
+    }
+
+    function handleAuthClick(event) {
+      gapi.auth2.getAuthInstance().signIn();
+    }
+  </script>
+
+  <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()">
+
+  </script>
+
+  <script src="/scripts/index.js" type='module'></script>
+</body>
+
+</html>
